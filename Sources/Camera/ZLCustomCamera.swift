@@ -867,6 +867,10 @@ open class ZLCustomCamera: UIViewController, CAAnimationDelegate {
         }
         self.dismissBtn.isHidden = true
         let connection = self.movieFileOutput.connection(with: .video)
+        if nil != connection {
+            self.movieFileOutput.setOutputSettings([AVVideoCodecKey:AVVideoCodecType.h264, AVVideoCompressionPropertiesKey:[AVVideoAverageBitRateKey : 800000]], for: connection!);
+        }
+        
         connection?.videoScaleAndCropFactor = 1
         if !self.restartRecordAfterSwitchCamera {
             connection?.videoOrientation = self.orientation
