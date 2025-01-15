@@ -991,6 +991,11 @@ open class ZLCustomCamera: UIViewController {
         if videoInput?.device.position == .front, connection?.isVideoMirroringSupported == true {
             connection?.isVideoMirrored = ZLPhotoConfiguration.default().cameraConfiguration.isVideoMirrored
         }
+        
+        if nil != connection {
+            self.movieFileOutput?.setOutputSettings([AVVideoCodecKey:AVVideoCodecType.h264, AVVideoCompressionPropertiesKey:[AVVideoAverageBitRateKey : 800000]], for: connection!);
+        }
+        
         let setting = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecJPEG])
         if videoInput?.device.hasFlash == true, flashBtn.isSelected {
             setting.flashMode = .on
